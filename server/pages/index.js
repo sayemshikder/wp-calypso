@@ -304,7 +304,7 @@ function getDefaultContext( request ) {
 		bodyClasses,
 		isLoggedIn,
 		isSupportSession,
-		isEvergreen: target === 'evergreen' && calypsoEnv !== 'development',
+		addEvergreenCheck: target === 'evergreen' && calypsoEnv !== 'development',
 	} );
 
 	context.app = {
