@@ -103,12 +103,17 @@ function isUAInBrowserslist( userAgentString, environment = 'defaults' ) {
 function getBuildTargetFromRequest( request ) {
 	const isEvergreen = isUAInBrowserslist( request.useragent.source, 'evergreen' );
 	const isForcedFallback = request.query.forceFallback;
-	return isEvergreen && ! isForcedFallback ? 'evergreen' : null;
+	// Development is always evergreen.
+	const isDevelopment = process.env.NODE_ENV === 'development';
+	return isDevelopment || ( isEvergreen && ! isForcedFallback ) ? 'evergreen' : null;
 }
 
 const ASSETS_PATH = path.join( __dirname, '../', 'bundler' );
 function getAssetsPath( target ) {
-	const result = path.join( ASSETS_PATH, target ? `assets-${ target }.json` : 'assets.json' );
+	const result = path.join(
+		ASSETS_PATH,
+		target ? `assets-${ target }.json` : 'assets-fallback.json'
+	);
 	return result;
 }
 
@@ -299,7 +304,7 @@ function getDefaultContext( request ) {
 		bodyClasses,
 		isLoggedIn,
 		isSupportSession,
-		isEvergreen: target === 'evergreen',
+		isEvergreen: target === 'evergreen' && calypsoEnv !== 'development',
 	} );
 
 	context.app = {
