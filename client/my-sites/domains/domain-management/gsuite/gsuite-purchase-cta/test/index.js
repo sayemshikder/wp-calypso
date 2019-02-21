@@ -25,7 +25,6 @@ describe( 'GSuitePurchaseCta', () => {
 						monthlyPrice={ '$5' }
 						productSlug={ 'gapps' }
 						selectedSite={ { ID: 'foo' } }
-						store={ store }
 					/>
 				</Provider>
 			)
@@ -43,7 +42,6 @@ describe( 'GSuitePurchaseCta', () => {
 						monthlyPrice={ '$5' }
 						productSlug={ 'gappsbusiness' }
 						selectedSite={ { ID: 'foo' } }
-						store={ store }
 					/>
 				</Provider>
 			)
