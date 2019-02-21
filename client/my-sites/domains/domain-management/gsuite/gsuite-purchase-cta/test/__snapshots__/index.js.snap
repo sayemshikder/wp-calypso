@@ -181,18 +181,6 @@ exports[`GSuitePurchaseCta it renders GSuitePurchaseCta with basic plan 1`] = `
       </div>
     </div>
     <div
-      className="gsuite-purchase-cta__add-google-apps-card-secondary-button"
-    >
-      <button
-        className="button form-button is-primary"
-        locale="en"
-        onClick={[Function]}
-        type="button"
-      >
-        Add G Suite
-      </button>
-    </div>
-    <div
       className="gsuite-purchase-cta__add-google-apps-card-learn-more"
     >
       <p>
@@ -210,6 +198,18 @@ exports[`GSuitePurchaseCta it renders GSuitePurchaseCta with basic plan 1`] = `
           Learn more about integrating G Suite with your site.
         </a>
       </p>
+    </div>
+    <div
+      className="gsuite-purchase-cta__add-google-apps-card-secondary-button"
+    >
+      <button
+        className="button form-button is-primary"
+        locale="en"
+        onClick={[Function]}
+        type="button"
+      >
+        Add G Suite
+      </button>
     </div>
   </div>
 </EmailVerificationGate>
@@ -397,18 +397,6 @@ exports[`GSuitePurchaseCta it renders GSuitePurchaseCta with business plan 1`] =
       </div>
     </div>
     <div
-      className="gsuite-purchase-cta__add-google-apps-card-secondary-button"
-    >
-      <button
-        className="button form-button is-primary"
-        locale="en"
-        onClick={[Function]}
-        type="button"
-      >
-        Add G Suite
-      </button>
-    </div>
-    <div
       className="gsuite-purchase-cta__add-google-apps-card-learn-more"
     >
       <p>
@@ -426,6 +414,18 @@ exports[`GSuitePurchaseCta it renders GSuitePurchaseCta with business plan 1`] =
           Learn more about integrating G Suite with your site.
         </a>
       </p>
+    </div>
+    <div
+      className="gsuite-purchase-cta__add-google-apps-card-secondary-button"
+    >
+      <button
+        className="button form-button is-primary"
+        locale="en"
+        onClick={[Function]}
+        type="button"
+      >
+        Add G Suite
+      </button>
     </div>
   </div>
 </EmailVerificationGate>
