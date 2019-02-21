@@ -16,6 +16,7 @@ import { recordTracksEvent } from 'state/analytics/actions';
 import FormSectionHeading from 'components/forms/form-section-heading';
 import FormFieldset from 'components/forms/form-fieldset';
 import { purchaseType } from 'lib/purchases';
+import GSuitePurchaseCtaFeatures from 'my-sites/domains/domain-management/gsuite/gsuite-purchase-cta/features';
 
 class GSuiteCancellationDialog extends Component {
 	static propTypes = {
@@ -25,10 +26,9 @@ class GSuiteCancellationDialog extends Component {
 	};
 
 	render() {
-		const { translate } = this.props;
-
-		const gsuiteDomain = purchaseType( this.props.purchase );
-
+		const { translate, purchase } = this.props;
+		const gsuiteDomain = purchaseType( purchase );
+		const { productSlug } = purchase;
 		return (
 			<Fragment>
 				<FormSectionHeading>{ translate( "We're sorry to see you go." ) }</FormSectionHeading>
@@ -40,16 +40,16 @@ class GSuiteCancellationDialog extends Component {
 							{ components: { siteName: <em>{ gsuiteDomain }</em> } }
 						) }
 					</p>
+					<GSuitePurchaseCtaFeatures productSlug={ productSlug } domainName={ gsuiteDomain } />
 				</FormFieldset>
 			</Fragment>
 		);
 	}
 }
 
-const mapStateToProps = null;
-const mapDispatchToProps = { recordTracksEvent };
-
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps
+	null,
+	{
+		recordTracksEvent,
+	}
 )( localize( GSuiteCancellationDialog ) );
