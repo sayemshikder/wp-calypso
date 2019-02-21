@@ -25,7 +25,9 @@ describe( 'GSuitePurchaseCta', () => {
 		const tree = renderer
 			.create(
 				<GSuitePurchaseCta
-					product={ { product_slug: 'gapps', prices: { USD: 50 } } }
+					annualPrice={ '$50' }
+					monthlyPrice={ '$5' }
+					productSlug={ 'gapps' }
 					selectedSite={ { ID: 'foo' } }
 					store={ store }
 				/>
@@ -39,7 +41,9 @@ describe( 'GSuitePurchaseCta', () => {
 		const tree = renderer
 			.create(
 				<GSuitePurchaseCta
-					product={ { product_slug: 'gappsbusiness', prices: { USD: 50 } } }
+					annualPrice={ '$50' }
+					monthlyPrice={ '$5' }
+					productSlug={ 'gappsbusiness' }
 					selectedSite={ { ID: 'foo' } }
 					store={ store }
 				/>

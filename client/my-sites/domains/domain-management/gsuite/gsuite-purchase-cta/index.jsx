@@ -4,7 +4,6 @@
  * External dependencies
  */
 import { connect } from 'react-redux';
-import { get } from 'lodash';
 import { localize } from 'i18n-calypso';
 import page from 'page';
 import PropTypes from 'prop-types';
@@ -20,8 +19,6 @@ import config from 'config';
 import { composeAnalytics, recordGoogleEvent, recordTracksEvent } from 'state/analytics/actions';
 import { domainManagementAddGSuiteUsers } from 'my-sites/domains/paths';
 import EmailVerificationGate from 'components/email-verification/email-verification-gate';
-import { getAnnualPrice, getMonthlyPrice } from 'lib/google-apps';
-import { getCurrentUserCurrencyCode } from 'state/current-user/selectors';
 import { getDomainsBySiteId } from 'state/sites/domains/selectors';
 import { getEligibleDomain } from 'lib/domains/gsuite';
 
@@ -40,26 +37,23 @@ class GSuitePurchaseCta extends React.Component {
 	};
 
 	getStorageText() {
-		const { product, translate } = this.props;
-		if ( 'gapps' === product.product_slug ) {
+		const { productSlug, translate } = this.props;
+		if ( 'gapps' === productSlug ) {
 			return translate( 'Get 30GB of storage for all your files synced across devices.' );
-		} else if ( 'gappsbusiness' === product.product_slug ) {
+		} else if ( 'gappsbusiness' === productSlug ) {
 			return translate( 'Get 30GB of storage for all your files synced across devices.' );
 		}
 	}
 
 	getPlanText() {
-		const { product, translate } = this.props;
-		if ( 'gappsbusiness' === product.product_slug ) {
+		const { productSlug, translate } = this.props;
+		if ( 'gappsbusiness' === productSlug ) {
 			return translate( 'Business' );
 		}
 	}
 
 	renderCta() {
-		const { currencyCode, domainName, translate } = this.props;
-		const price = get( this.props, [ 'product', 'prices', currencyCode ], 0 );
-		const annualPrice = getAnnualPrice( price, currencyCode );
-		const monthlyPrice = getMonthlyPrice( price, currencyCode );
+		const { annualPrice, domainName, monthlyPrice, translate } = this.props;
 		const upgradeAvailable = config.isEnabled( 'upgrades/checkout' );
 
 		return (
@@ -249,9 +243,10 @@ const learnMoreClick = domainName =>
 	);
 
 GSuitePurchaseCta.propTypes = {
-	currencyCode: PropTypes.string.isRequired,
+	annualPrice: PropTypes.string.isRequired,
 	domainName: PropTypes.string.isRequired,
-	product: PropTypes.object.isRequired,
+	monthlyPrice: PropTypes.string.isRequired,
+	productSlug: PropTypes.string.isRequired,
 	selectedDomainName: PropTypes.string,
 	selectedSite: PropTypes.oneOfType( [ PropTypes.object, PropTypes.bool ] ).isRequired,
 };
@@ -260,7 +255,6 @@ export default connect(
 	( state, { selectedDomainName, selectedSite } ) => {
 		const domains = getDomainsBySiteId( state, selectedSite.ID );
 		return {
-			currencyCode: getCurrentUserCurrencyCode( state ),
 			domainName: getEligibleDomain( selectedDomainName, domains ),
 		};
 	},
