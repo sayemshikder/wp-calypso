@@ -19,7 +19,7 @@ const { BundleAnalyzerPlugin } = require( 'webpack-bundle-analyzer' );
 const TerserPlugin = require( 'terser-webpack-plugin' );
 const CircularDependencyPlugin = require( 'circular-dependency-plugin' );
 const DuplicatePackageCheckerPlugin = require( 'duplicate-package-checker-webpack-plugin' );
-const MomentTimezoneDataPlugin = require( 'moment-timezone-data-webpack-plugin' );
+// const MomentTimezoneDataPlugin = require( 'moment-timezone-data-webpack-plugin' );
 const FilterWarningsPlugin = require( 'webpack-filter-warnings-plugin' );
 
 /**
@@ -370,9 +370,9 @@ function getWebpackConfig( {
 				} ),
 			shouldEmitStats && new webpack.ProgressPlugin( createProgressHandler() ),
 			new BuildCustomPropertiesCssPlugin(),
-			new MomentTimezoneDataPlugin( {
-				startYear: 2000,
-			} ),
+			// new MomentTimezoneDataPlugin( {
+			// 	startYear: 2000,
+			// } ),
 			new FilterWarningsPlugin( {
 				// suppress conflicting order warnings from mini-css-extract-plugin.
 				// see https://github.com/webpack-contrib/mini-css-extract-plugin/issues/250
