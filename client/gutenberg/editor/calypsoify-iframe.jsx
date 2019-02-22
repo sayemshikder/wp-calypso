@@ -25,6 +25,8 @@ import { replaceHistory, setRoute, navigate } from 'state/ui/actions';
 import getCurrentRoute from 'state/selectors/get-current-route';
 import getPostTypeTrashUrl from 'state/selectors/get-post-type-trash-url';
 import wpcom from 'lib/wp';
+import EditorRevisionsDialog from 'post-editor/editor-revisions/dialog';
+import { openPostRevisionsDialog } from 'state/posts/revisions/actions';
 
 /**
  * Style dependencies
@@ -108,6 +110,17 @@ class CalypsoifyIframe extends Component {
 		if ( 'postTrashed' === action ) {
 			this.props.navigate( this.props.postTypeTrashUrl );
 		}
+
+		if ( 'openRevisions' === action ) {
+			this.props.openPostRevisionsDialog();
+		}
+	};
+
+	loadRevision = revision => {
+		this.iframePort.postMessage( {
+			action: 'loadRevision',
+			payload: revision,
+		} );
 	};
 
 	closeMediaModal = media => {
@@ -147,6 +160,7 @@ class CalypsoifyIframe extends Component {
 						visible={ isMediaModalVisible }
 					/>
 				</MediaLibrarySelectedData>
+				<EditorRevisionsDialog loadRevision={ this.loadRevision } />
 			</Fragment>
 		);
 	}
@@ -190,6 +204,7 @@ const mapDispatchToProps = {
 	replaceHistory,
 	setRoute,
 	navigate,
+	openPostRevisionsDialog,
 };
 
 export default connect(
