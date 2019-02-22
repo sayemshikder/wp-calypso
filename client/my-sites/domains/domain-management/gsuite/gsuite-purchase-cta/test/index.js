@@ -14,6 +14,8 @@ import GSuitePurchaseCta from '../';
 
 jest.mock( 'components/email-verification/email-verification-gate', () => 'EmailVerificationGate' );
 
+jest.mock( '../features', () => 'GSuitePurchaseCtaFeatures' );
+
 describe( 'GSuitePurchaseCta', () => {
 	test( 'it renders GSuitePurchaseCta with basic plan', () => {
 		const store = createReduxStore();
