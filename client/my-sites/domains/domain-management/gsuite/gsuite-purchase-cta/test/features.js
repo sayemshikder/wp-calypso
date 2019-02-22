@@ -39,4 +39,36 @@ describe( 'GSuitePurchaseCtaFeatures', () => {
 			.toJSON();
 		expect( tree ).toMatchSnapshot();
 	} );
+
+	test( 'it renders GSuitePurchaseCtaFeatures in a grid', () => {
+		const store = createReduxStore();
+		const tree = renderer
+			.create(
+				<Provider store={ store }>
+					<GSuitePurchaseCtaFeatures
+						domainName={ 'testing123.com' }
+						productSlug={ 'gapps' }
+						type={ 'grid' }
+					/>
+				</Provider>
+			)
+			.toJSON();
+		expect( tree ).toMatchSnapshot();
+	} );
+
+	test( 'it renders GSuitePurchaseCtaFeatures in a list', () => {
+		const store = createReduxStore();
+		const tree = renderer
+			.create(
+				<Provider store={ store }>
+					<GSuitePurchaseCtaFeatures
+						domainName={ 'testing123.com' }
+						productSlug={ 'gapps' }
+						type={ 'list' }
+					/>
+				</Provider>
+			)
+			.toJSON();
+		expect( tree ).toMatchSnapshot();
+	} );
 } );

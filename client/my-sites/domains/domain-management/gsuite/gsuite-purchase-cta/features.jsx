@@ -34,11 +34,17 @@ class GSuitePurchaseCtaFeatures extends React.Component {
 	}
 
 	render() {
-		const { domainName, translate } = this.props;
+		const { domainName, type, translate } = this.props;
 
 		return (
 			<Fragment>
-				<div className="gsuite-purchase-cta__add-google-apps-card-features">
+				<div
+					className={
+						'grid' === type
+							? 'gsuite-purchase-cta__add-google-apps-card-features-grid'
+							: 'gsuite-purchase-cta__add-google-apps-card-features-list'
+					}
+				>
 					<div className="gsuite-purchase-cta__add-google-apps-card-feature">
 						<div className="gsuite-purchase-cta__add-google-apps-card-feature-block">
 							<img alt="Gmail Logo" src="/calypso/images/g-suite/logo_gmail_48dp.svg" />
@@ -144,6 +150,11 @@ const learnMoreClick = domainName =>
 GSuitePurchaseCtaFeatures.propTypes = {
 	domainName: PropTypes.string.isRequired,
 	productSlug: PropTypes.string.isRequired,
+	type: PropTypes.oneOf( [ 'grid', 'list' ] ),
+};
+
+GSuitePurchaseCtaFeatures.defaultProps = {
+	type: 'grid',
 };
 
 export default connect(

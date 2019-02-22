@@ -105,7 +105,11 @@ class GSuitePurchaseCta extends React.Component {
 				</CompactCard>
 
 				<CompactCard>
-					<GSuitePurchaseCtaFeatures domainName={ domainName } productSlug={ productSlug } />
+					<GSuitePurchaseCtaFeatures
+						domainName={ domainName }
+						productSlug={ productSlug }
+						type={ 'grid' }
+					/>
 
 					<div className="gsuite-purchase-cta__add-google-apps-card-secondary-button">
 						{ upgradeAvailable && (

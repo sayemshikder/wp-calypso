@@ -83,6 +83,7 @@ exports[`GSuitePurchaseCta it renders GSuitePurchaseCta with basic plan 1`] = `
     <GSuitePurchaseCtaFeatures
       domainName=""
       productSlug="gapps"
+      type="grid"
     />
     <div
       className="gsuite-purchase-cta__add-google-apps-card-secondary-button"
@@ -184,6 +185,7 @@ exports[`GSuitePurchaseCta it renders GSuitePurchaseCta with business plan 1`] =
     <GSuitePurchaseCtaFeatures
       domainName=""
       productSlug="gappsbusiness"
+      type="grid"
     />
     <div
       className="gsuite-purchase-cta__add-google-apps-card-secondary-button"
