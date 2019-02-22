@@ -38,7 +38,7 @@ import getRequestedRewind from 'state/selectors/get-requested-rewind';
 import getRewindState from 'state/selectors/get-rewind-state';
 import getSiteGmtOffset from 'state/selectors/get-site-gmt-offset';
 import getSiteTimezoneValue from 'state/selectors/get-site-timezone-value';
-import { adjustMoment } from '../activity-log/utils';
+import { adjustDateOffset } from '../activity-log/utils';
 import { getSite } from 'state/sites/selectors';
 import { isDesktop, addIsDesktopListener, removeIsDesktopListener } from 'lib/viewport';
 
@@ -276,7 +276,6 @@ class ActivityLogItem extends Component {
 			gmtOffset,
 			mightBackup,
 			mightRewind,
-			moment,
 			timezone,
 			translate,
 		} = this.props;
@@ -284,7 +283,7 @@ class ActivityLogItem extends Component {
 
 		const classes = classNames( 'activity-log-item', className );
 
-		const adjustedTime = adjustMoment( { gmtOffset, moment: moment.utc( activityTs ), timezone } );
+		const adjustedTime = adjustDateOffset( activityTs, { gmtOffset, timezone } );
 
 		return (
 			<React.Fragment>

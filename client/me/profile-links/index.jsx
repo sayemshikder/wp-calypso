@@ -172,7 +172,6 @@ class ProfileLinks extends React.Component {
 				<QueryProfileLinks />
 				<SectionHeader label={ this.props.translate( 'Profile Links' ) }>
 					<AddProfileLinksButtons
-						showingForm={ !! this.state.showingForm }
 						onShowAddOther={ this.showAddOther }
 						showPopoverMenu={ this.state.showPopoverMenu }
 						onShowAddWordPress={ this.showAddWordPress }
