@@ -1,9 +1,12 @@
 /**
  * External dependencies
  */
+import { isBlobURL } from '@wordpress/blob';
+import { Spinner } from '@wordpress/components';
 import { Component, createRef } from '@wordpress/element';
 import { isEqual } from 'lodash';
 import ResizeObserver from 'resize-observer-polyfill';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
@@ -105,7 +108,14 @@ class Slideshow extends Component {
 				>
 					<div className="swiper-wrapper">
 						{ images.map( ( { alt, caption, id, url } ) => (
-							<figure className="wp-block-jetpack-slideshow_slide swiper-slide" key={ id }>
+							<figure
+								className={ classnames(
+									'wp-block-jetpack-slideshow_slide',
+									'swiper-slide',
+									isBlobURL( url ) && 'is-transient'
+								) }
+								key={ id }
+							>
 								<img
 									alt={ alt }
 									className={
@@ -114,6 +124,7 @@ class Slideshow extends Component {
 									data-id={ id }
 									src={ url }
 								/>
+								{ isBlobURL( url ) && <Spinner /> }
 								{ caption && (
 									<figcaption className="wp-block-jetpack-slideshow_caption">
 										{ caption }
