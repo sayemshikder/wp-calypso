@@ -92,7 +92,7 @@ class Slideshow extends Component {
 	};
 
 	render() {
-		const { autoplay, className, delay, effect, images } = this.props;
+		const { autoplay, className, delay, effect, forSave, images } = this.props;
 		// Note: React omits the data attribute if the value is null, but NOT if it is false.
 		// This is the reason for the unusual logic related to autoplay below.
 		return (
@@ -107,31 +107,34 @@ class Slideshow extends Component {
 					ref={ this.slideshowRef }
 				>
 					<div className="swiper-wrapper">
-						{ images.map( ( { alt, caption, id, url } ) => (
-							<figure
-								className={ classnames(
-									'wp-block-jetpack-slideshow_slide',
-									'swiper-slide',
-									isBlobURL( url ) && 'is-transient'
-								) }
-								key={ id }
-							>
-								<img
-									alt={ alt }
-									className={
-										`wp-block-jetpack-slideshow_image wp-image-${ id }` /* wp-image-${ id } makes WordPress add a srcset */
-									}
-									data-id={ id }
-									src={ url }
-								/>
-								{ isBlobURL( url ) && <Spinner /> }
-								{ caption && (
-									<figcaption className="wp-block-jetpack-slideshow_caption">
-										{ caption }
-									</figcaption>
-								) }
-							</figure>
-						) ) }
+						{ images.map(
+							( { alt, caption, id, url } ) =>
+								( ! forSave || ( forSave && ! isBlobURL( url ) ) ) && (
+									<figure
+										className={ classnames(
+											'wp-block-jetpack-slideshow_slide',
+											'swiper-slide',
+											isBlobURL( url ) && 'is-transient'
+										) }
+										key={ id }
+									>
+										<img
+											alt={ alt }
+											className={
+												`wp-block-jetpack-slideshow_image wp-image-${ id }` /* wp-image-${ id } makes WordPress add a srcset */
+											}
+											data-id={ id }
+											src={ url }
+										/>
+										{ isBlobURL( url ) && <Spinner /> }
+										{ caption && (
+											<figcaption className="wp-block-jetpack-slideshow_caption">
+												{ caption }
+											</figcaption>
+										) }
+									</figure>
+								)
+						) }
 					</div>
 					<div
 						className="wp-block-jetpack-slideshow_pagination swiper-pagination swiper-pagination-white"
